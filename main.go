@@ -15,6 +15,7 @@ import (
 func main() {
 	godotenv.Load(".env")
 
+	//get the port
 	port := os.Getenv("ECHO_PORT")
 	if port == "" {
 		port = "8080"
@@ -33,9 +34,10 @@ func main() {
 
 	config.SetClient(client)
 
-	//port = "1323"
 	e := echo.New()
-	//e.GET("/", controller.UserGetAll)
+
+	//register the routes
 	router.RegisterRouter(e)
+
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", port)))
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// Get all the users
 func UserGetAll(ctx echo.Context) error {
 	users, err := service.NewUserService(ctx.Request().Context()).UserGetAll()
 	if err != nil {
@@ -19,6 +20,7 @@ func UserGetAll(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, users)
 }
 
+// Gets the data of a user according to the id
 func UserGetById(ctx echo.Context) error {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
@@ -33,6 +35,7 @@ func UserGetById(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, user)
 }
 
+// Create a new user
 func UserCreate(ctx echo.Context) error {
 	var newUser ent.User
 	err := json.NewDecoder(ctx.Request().Body).Decode(&newUser)
@@ -47,6 +50,7 @@ func UserCreate(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, user)
 }
 
+// update an existing user
 func UserUpdate(ctx echo.Context) error {
 	var newUserData ent.User
 	err := json.NewDecoder(ctx.Request().Body).Decode(&newUserData)
@@ -61,6 +65,7 @@ func UserUpdate(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, user)
 }
 
+// Delete a user
 func UserDelete(ctx echo.Context) error {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
